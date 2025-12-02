@@ -157,11 +157,11 @@ test.describe('Проверка загрузки файлов', () => {
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
     );
-    console.log({workspace, path: path.join(
+    console.log({workspace, 
+      we: fs.existsSync(workspace), path: path.join(
       workspace,
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
-      we: fs.existsSync(workspace)
     )})
 
     expect(fs.existsSync(tempDir)).toBeTruthy();
