@@ -159,9 +159,14 @@ test.describe('Проверка загрузки файлов', () => {
     );
     console.log({workspace, 
       we: fs.existsSync(workspace),
+      path: process.env.UPLOAD_PATH_TEMP || 'temp',
       files: fs.existsSync(path.join(
       workspace,
       'backend/src/public')),
+      files2: fs.existsSync(path.join(
+      workspace,
+      'backend/src/public',
+      process.env.UPLOAD_PATH_TEMP || 'temp')),
       path: path.join(
       workspace,
       'backend/src/public',
