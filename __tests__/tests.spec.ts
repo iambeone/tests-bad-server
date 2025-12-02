@@ -157,21 +157,14 @@ test.describe('Проверка загрузки файлов', () => {
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
     );
-    console.log({workspace, 
-      we: fs.existsSync(workspace),
-      pathTmp: process.env.UPLOAD_PATH_TEMP || 'temp',
-      files: fs.existsSync(path.join(
+    const files = fs.readdirSync(path.join(
       workspace,
-      'backend/src/public')),
-      files2: fs.existsSync(path.join(
-      workspace,
-      'backend/src/public',
-      process.env.UPLOAD_PATH_TEMP || 'temp')),
-      path: path.join(
-      workspace,
-      'backend/src/public',
-      process.env.UPLOAD_PATH_TEMP || 'temp',
-    )})
+      'backend/src/public'
+    ), { withFileTypes: true });
+
+    files.forEach(file => {
+      console.log(file.name);
+    });
 
     expect(fs.existsSync(tempDir)).toBeTruthy();
   });
