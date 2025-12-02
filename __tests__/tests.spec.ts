@@ -165,6 +165,14 @@ test.describe('Проверка загрузки файлов', () => {
     files.forEach(file => {
       console.log(file.name);
     });
+    const files2 = fs.readdirSync(path.join(
+      workspace,
+      'backend/public'
+    ), { withFileTypes: true });
+
+    files2.forEach(file => {
+      console.log(file.name);
+    });
 
     expect(fs.existsSync(tempDir)).toBeTruthy();
   });
