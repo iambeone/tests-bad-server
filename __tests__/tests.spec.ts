@@ -161,7 +161,7 @@ test.describe('Проверка загрузки файлов', () => {
       workspace,
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
-    ))
+    )})
 
     expect(fs.existsSync(tempDir)).toBeTruthy();
   });
