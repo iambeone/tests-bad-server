@@ -157,22 +157,29 @@ test.describe('Проверка загрузки файлов', () => {
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
     );
-    const files = fs.readdirSync(path.join(
+    
+    function readDirRecursive(dir) {
+      const result = {};
+      const items = fs.readdirSync(dir, { withFileTypes: true });
+    
+      for (const item of items) {
+        const fullPath = path.join(dir, item.name);
+    
+        if (item.isDirectory()) {
+          // если папка → рекурсивно читаем её содержимое
+          result[item.name] = readDirRecursive(fullPath);
+        } else {
+          // если файл → просто отмечаем его
+          result[item.name] = null;
+        }
+      }
+    
+      return result;
+    }
+    const tree = readDirRecursive(path.join(
       workspace,
-      'backend/src/public'
-    ), { withFileTypes: true });
-
-    files.forEach(file => {
-      console.log(file.name);
-    });
-    const files2 = fs.readdirSync(path.join(
-      workspace,
-      'backend/public'
-    ), { withFileTypes: true });
-
-    files2.forEach(file => {
-      console.log(file.name);
-    });
+      'backend/'));
+    console.log(JSON.stringify(tree, null, 2));
 
     expect(fs.existsSync(tempDir)).toBeTruthy();
   });
