@@ -157,7 +157,7 @@ test.describe('Проверка загрузки файлов', () => {
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
     );
-    console.log({path: path.join(
+    console.log({workspace, path: path.join(
       workspace,
       'backend/src/public',
       process.env.UPLOAD_PATH_TEMP || 'temp',
